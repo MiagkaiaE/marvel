@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Какой ты герой Marvel</title>
+</head>
+<body>
+	<div class="container">
+		<div class="modal-window">
+			<p class= "modal-window_text" id ="question">Привет, как тебя зовут?</p>
+			<input type="text" class = "modal-windiw_input" id="userInput" placeholder="Меня зовут...">
+			<button class="modal-window_button" id ="submitButton">Отправить</button>
+		</div>
+	</div>
+	<script>
+		document.getElementById('submitButton').addEventListener('click', function() {
+            const userInput = document.getElementById('userInput').value;
+
+            if (userInput) {
+                // Меняем вопрос на новый с использованием имени пользователя
+                document.getElementById('question').innerHTML = `Привет, ${userInput}!<br> Давай узнаем, какой ты герой Marvel?`;
+                
+                // Скрываем поле ввода
+                document.getElementById('userInput').style.display = 'none';
+                
+                // Меняем текст кнопки
+                document.getElementById('submitButton').innerText = 'Давай';
+                
+                // Обновляем обработчик события для новой кнопки
+                document.getElementById('submitButton').addEventListener('click', function() {
+                    const colorInput = answerInput.value;
+                    if (colorInput) {
+                        alert(`Ваш любимый цвет: ${colorInput}`);
+                    } else {
+                        alert('Пожалуйста, введите ваш любимый цвет.');
+                    }
+                });
+            } else {
+                alert('Пожалуйста, введите ваше имя.');
+            }
+        });
+  </script>
+</body>
+</html>

@@ -100,3 +100,8 @@
 	transform: perspective(1000px) rotateX(0deg) scale(1.05);
 	background-color:#601fc9;
 }
+ 
+подсветить рамку в случае ошибки
+input.error {
+	border: 2px solid red; /* Подсветка красной рамкой */
+}

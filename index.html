@@ -10,11 +10,88 @@
 	<div class="container">
 		<div class="modal-window">
 			<p class= "modal-window_text" id ="question">Привет, как тебя зовут?</p>
-			<input type="text" class = "modal-windiw_input" id="userInput" placeholder="Меня зовут...">
+			<input type="text" class = "modal-window_input" id="userInput" placeholder="Меня зовут...">
 			<button class="modal-window_button" id ="submitButton">Отправить</button>
 		</div>
+		<div id="imageContainer"></div> <!-- Контейнер для изображений -->
 	</div>
 	<script>
+		const images = [
+			 { url: 'image/captain_america.jpg', caption: 'Ты смелый и отважный Капитан Америка' },
+			 { url: 'image/deadpool.jpg', caption: 'Ты Дэдпул, любитель пепперони' },
+			 { url: 'image/doctor_strange.jpg', caption: 'Ты Доктор Стрэндж, поедатель мармелада' },
+			 { url: 'image/hulk.jpg', caption: 'Ты халк, мастер по лепке снеговиков' },
+			 { url: 'image/iron_man.jpg', caption: 'Ты железный человек, любитель прогулок' },
+			 { url: 'image/spider_man.jpg', caption: 'Ты Человек Паук, мастер прыгать выше всех' },
+			 { url: 'image/tor.jpg', caption: 'Ты Тор, пожиратель бургеров' },
+			 { url: 'image/venom.jpg', caption: 'Ты Веном, чемпион Fortnite' },
+		];
+
+		let isNameEntered = false;
+		const container = document.querySelector('.container');
+
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const userInput = document.getElementById('userInput');
+            const userValue = userInput.value;
+            const questionElement = document.getElementById('question');
+            const submitButton = document.getElementById('submitButton');
+
+            if (!isNameEntered) {
+                if (userValue) {
+                    questionElement.innerHTML = `Привет, ${userValue}!<br> Давай узнаем, какой ты герой Marvel?`;
+                    userInput.style.display = 'none';
+                    submitButton.innerText = 'Давай';
+                    isNameEntered = true;
+                } else {
+                    console.log("Имя не введено, добавляем класс error");
+                    userInput.classList.add('error');
+                    setTimeout(() => {
+                        console.log("Удаляем класс error");
+                        userInput.classList.remove('error');
+                    }, 2000);
+                }
+            } else {
+                console.log("Нажата кнопка 'Давай' или 'Попробовать еще раз', вызываем showRandomImage");
+                showRandomImage();
+					//  прямое обращение к css свойству через JS
+					// меняем направление основной оси flex-контейнера на вертикальное
+                container.style.flexDirection = 'column'; 
+					//  затемняем фон контейнера
+					console.log("flex-direction установлен на column");
+                // Затемняем фон через добавление класса
+                container.classList.add('darkened');
+                console.log("Класс 'darkened' добавлен, background-color должен быть rgba(0, 0, 0, 0.5)");
+            }
+        });
+
+        function showRandomImage() {
+            console.log("Функция showRandomImage вызвана"); // Проверка вызова функции
+            const randomIndex = Math.floor(Math.random() * images.length);
+            const selectedImage = images[randomIndex];
+            console.log("Выбранный герой:", selectedImage.url, "с подписью:", selectedImage.caption); // Проверка данных героя
+            const questionElement = document.getElementById('question');
+            const imageContainer = document.getElementById('imageContainer');
+            const submitButton = document.getElementById('submitButton');
+
+            // Подпись в модальном окне
+            questionElement.innerHTML = selectedImage.caption;
+            console.log("Подпись обновлена в модальном окне:", selectedImage.caption);
+
+            // Картинка вне модального окна в imageContainer
+            imageContainer.innerHTML = `
+                <img src="${selectedImage.url}" alt="${selectedImage.caption}" style="max-width: 500px;"/>
+            `;
+            console.log("Картинка добавлена в imageContainer:", selectedImage.url);
+
+            submitButton.innerText = 'Попробовать еще раз';
+            console.log("Текст кнопки изменен на 'Попробовать еще раз'");
+        }
+    </script>
+  </script>
+</body>
+</html>
+
+<!-- <script>
 		document.getElementById('submitButton').addEventListener('click', function() {
             const userInput = document.getElementById('userInput').value;
 
@@ -41,6 +118,4 @@
                 alert('Пожалуйста, введите ваше имя.');
             }
         });
-  </script>
-</body>
-</html>
+  </script> -->

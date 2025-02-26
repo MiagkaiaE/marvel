@@ -50,8 +50,29 @@
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	overflow: hidden; /* Чтобы псевдоэлемент для затемнения не выходил за пределы */
+}
+/* псевдоэлмент для затемнения */
+.container.darkened::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 0; /* Изначально прозрачный */
+            transition: opacity 0.5s ease; /* Плавное появление */
+        }
+.container.darkened::before {
+	opacity: 1; /* Полное затемнение при добавлении класса */
 }
 
+.modal-window, #imageContainer {
+	z-index: 1; /* Выше затемнения */
+  }
+		
+		
 .modal-window_text {
 	font-size: 24px;
 	color: #570fca;
@@ -67,7 +88,7 @@
 	transform: rotateX(5deg);
 }
 
-.modal-windiw_input {
+.modal-window_input {
 	font-size: 15px;
 	border-radius: 5px;
 	border: 2px solid rgb(108, 108, 214) ;
@@ -76,11 +97,11 @@
 }
 
 
-.modal-windiw_input:focus {
+.modal-window_input:focus {
 	border-color: #1633d6; /* Цвет рамки при фокусе */
 }
 
-.modal-windiw_input::placeholder {
+.modal-window_input::placeholder {
 	color: #601fc9; /* Цвет текста плейсхолдера */
 	opacity: 0.5; /* Убедитесь, что текст полностью непрозрачный */
 }
@@ -100,8 +121,19 @@
 	transform: perspective(1000px) rotateX(0deg) scale(1.05);
 	background-color:#601fc9;
 }
- 
-подсветить рамку в случае ошибки
-input.error {
+
+.modal-window_input.error {
 	border: 2px solid red; /* Подсветка красной рамкой */
+}
+
+#imageContainer {
+	margin-top: 30px;
+}
+
+#imageContainer {
+	padding: 10px;
+	text-align: center;
+	min-height: 200px;
+	box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5); /* Светлая тень */
+	transition: transform 0.2s; /* Плавный переход */	
 }

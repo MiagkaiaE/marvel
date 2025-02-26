@@ -29,6 +29,7 @@
 
 		let isNameEntered = false;
 		const container = document.querySelector('.container');
+		
 
         document.getElementById('submitButton').addEventListener('click', function() {
             const userInput = document.getElementById('userInput');
@@ -58,6 +59,8 @@
                 container.style.flexDirection = 'column'; 
 					//  затемняем фон контейнера
 					console.log("flex-direction установлен на column");
+					container.style.justifyContent = 'space-evenly'; // Сдвигаем содержимое равномерно
+        			
                 // Затемняем фон через добавление класса
                 container.classList.add('darkened');
                 console.log("Класс 'darkened' добавлен, background-color должен быть rgba(0, 0, 0, 0.5)");
@@ -79,7 +82,7 @@
 
             // Картинка вне модального окна в imageContainer
             imageContainer.innerHTML = `
-                <img src="${selectedImage.url}" alt="${selectedImage.caption}" style="max-width: 500px;"/>
+                <img src="${selectedImage.url}" alt="${selectedImage.caption}"/>
             `;
             console.log("Картинка добавлена в imageContainer:", selectedImage.url);
 

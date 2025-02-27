@@ -76,10 +76,7 @@
 .modal-window:hover {
 	transform: perspective(1000px) rotateX(0deg) scale(1.05); /* Увеличение при наведении */
 }
-
-
-
-		
+	
 .modal-window_text {
 	font-size: 24px;
 	color: #570fca;
